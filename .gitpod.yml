@@ -1,6 +1,7 @@
 image: jelaniwoods/appdev2021-ruby-gym
 
 tasks:
+  - command: bundle install
   - init: bin/setup
 ports:
   - port: 3000
@@ -8,6 +9,8 @@ ports:
 
 vscode:
   extensions:
-    - vortizhe.simple-ruby-erb@0.2.1:BzpDuNAqJwUkxqT2t1YIuQ==
-    - CraigMaslowski.erb@0.0.1:5znDha/nn0PphUrpB9a5Nw==
-    - mbessey.vscode-rufo@0.2.1:QlBwvnvHJPqtDjkgo7+OEQ==
+    - shd101wyy.markdown-preview-enhanced
+    - vortizhe.simple-ruby-erb
+    - CraigMaslowski.erb
+    - Vense.rails-snippets
+    - wingrunr21.vscode-ruby

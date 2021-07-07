@@ -10,6 +10,21 @@ ruby main.rb
 
 To re-run this command, you can use the UP and DOWN arrow keys to look at the history of all commands you've run in a particular Terminal.
 
+## Required exercises
+
+- black_jack
+- count_the
+- secret_encoder
+- secret_decoder
+- two_fer
+- character_types
+- dice_roll
+- sum_odd_integers
+- leap_year
+- raindrops
+- think_fast
+- accumulate
+
 ### black_jack
 
 Write a program to play a variety of BlackJack.

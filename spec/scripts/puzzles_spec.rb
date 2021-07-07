@@ -7,9 +7,11 @@ describe "black_jack.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("10 10\n")
 
     # expect { require_relative '../../black_jack' }.to output(/20/i).to_stdout
-    output = with_captured_stdout { require_relative('../../black_jack')} 
-    output = "empty" if output.empty? 
-    expect(output.match?(/Enter two number separated by spaces:\n20/i)).to be(true), "Expected output to be 'Enter two number separated by spaces:\\n20!', but was #{output.inspect}."
+    output = with_captured_stdout { require_relative('../../black_jack')}
+    output = output.gsub(/.?Enter two number separated by spaces:.?/, "").strip
+    output = "empty" if output.empty?
+
+    expect(output.match?(/20/i)).to be(true), "Expected output to be '20', but was #{output}."
   end
 end
 
@@ -22,9 +24,11 @@ describe "black_jack.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("13 11\n")
 
     # expect { require_relative '../../black_jack' }.to output(/14/i).to_stdout
-    output = with_captured_stdout { require_relative('../../black_jack')} 
-    output = "empty" if output.empty? 
-    expect(output.match?(/Enter two number separated by spaces:\n14/i)).to be(true), "Expected output to be 'Enter two number separated by spaces:\\n14!', but was #{output.inspect}."
+    output = with_captured_stdout { require_relative('../../black_jack')}
+    output = output.gsub(/.?Enter two number separated by spaces:.?/, "").strip
+    output = "empty" if output.empty?
+
+    expect(output.match?(/14/i)).to be(true), "Expected output to be '14', but was #{output}."
   end
 end
 
@@ -37,9 +41,11 @@ describe "black_jack.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("13 13\n")
 
     # expect { require_relative '../../black_jack' }.to output(/0/i).to_stdout
-    output = with_captured_stdout { require_relative('../../black_jack')} 
-    output = "empty" if output.empty? 
-    expect(output.match?(/Enter two number separated by spaces:\n0/i)).to be(true), "Expected output to be 'Enter two number separated by spaces:\\n0!', but was #{output.inspect}."
+    output = with_captured_stdout { require_relative('../../black_jack')}
+    output = output.gsub(/.?Enter two number separated by spaces:.?/, "").strip
+    output = "empty" if output.empty?
+
+    expect(output.match?(/0/i)).to be(true), "Expected output to be '0', but was #{output}."
   end
 end
 
@@ -52,9 +58,11 @@ describe "black_jack.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("11 11\n")
 
     # expect { require_relative '../../black_jack' }.to output(/12/i).to_stdout
-    output = with_captured_stdout { require_relative('../../black_jack')} 
-    output = "empty" if output.empty? 
-    expect(output.match?(/Enter two number separated by spaces:\n12/i)).to be(true), "Expected output to be 'Enter two number separated by spaces:\\n12!', but was #{output.inspect}."
+    output = with_captured_stdout { require_relative('../../black_jack')}
+    output = output.gsub(/.?Enter two number separated by spaces:.?/, "").strip
+    output = "empty" if output.empty?
+
+    expect(output.match?(/12/i)).to be(true), "Expected output to be '12', but was #{output}."
   end
 end
 
@@ -67,9 +75,11 @@ describe "count_the.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("the cabbage, the bagel, the apple, the drink, the bread\n")
 
     # expect { require_relative '../../count_the' }.to output(/.?the.? appeared 5 times/i).to_stdout
-    output = with_captured_stdout { require_relative('../../count_the')} 
-    output = "empty" if output.empty? 
-    expect(output.match?(/Enter a sentence:\n.?the.? appeared 5 times/i)).to be(true), "Expected output to be 'Enter a sentence:\\nthe appeared 5 times', but was #{output.inspect}."
+    output = with_captured_stdout { require_relative('../../count_the')}
+    output = output.gsub(/.?Enter a sentence:.?/, "").strip
+    output = "empty" if output.empty?
+
+    expect(output.match?(/.?the.? appeared 5 times/i)).to be(true), "Expected output to be 'the appeared 5 times', but was #{output}."
   end
 end
 
@@ -81,7 +91,12 @@ describe "count_the.rb" do
 
     allow_any_instance_of(Object).to receive(:gets).and_return("the, beginnning the end and the middle\n")
 
-    expect { require_relative '../../count_the' }.to output(/.?the.? appeared 3 times/i).to_stdout
+    # expect { require_relative '../../count_the' }.to output(/.?the.? appeared 3 times/i).to_stdout
+    output = with_captured_stdout { require_relative('../../count_the')}
+    output = output.gsub(/.?Enter a sentence:.?/, "").strip
+    output = "empty" if output.empty?
+
+    expect(output.match?(/.?the.? appeared 3 times/i)).to be(true), "Expected output to be 'the appeared 3 times', but was #{output}."
   end
 end
 
@@ -94,9 +109,11 @@ describe "count_the.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("the- then, the\n")
 
     # expect { require_relative '../../count_the' }.to output(/.?the.? appeared 2 times/i).to_stdout
-    output = with_captured_stdout { require_relative('../../count_the')} 
-    output = "empty" if output.empty? 
-    expect(output.match?(/Enter a sentence:\n.?the.? appeared 2 times/i)).to be(true), "Expected output to be 'Enter a sentence:\\nthe appeared 2 times', but was #{output.inspect}."
+    output = with_captured_stdout { require_relative('../../count_the')}
+    output = output.gsub(/.?Enter a sentence:.?/, "").strip
+    output = "empty" if output.empty?
+
+    expect(output.match?(/.?the.? appeared 2 times/i)).to be(true), "Expected output to be 'the appeared 2 times', but was #{output}."
   end
 end
 
@@ -105,8 +122,10 @@ describe "secret_encoder.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("I need to be more secret\n")
     # expect { require_relative '../../secret_encoder.rb' }.to output(/3 n22d t4 b2 m4r2 s2cr2t/).to_stdout
     output = with_captured_stdout { require_relative('../../secret_encoder')} 
+    output = output.gsub(/.?Enter in the secret you want to encode?.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter in the secret you want to encode\n3 n22d t4 b2 m4r2 s2cr2t/)).to be(true), "Expected output to be 'Enter in the secret you want to encode\n3 n22d t4 b2 m4r2 s2cr2t', but was #{output.inspect}."
+
+    expect(output.match?(/3 n22d t4 b2 m4r2 s2cr2t/)).to be(true), "Expected output to be '3 n22d t4 b2 m4r2 s2cr2t', but was #{output}."
   end
 end
 
@@ -120,18 +139,22 @@ describe "secret_encoder.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("Don't tell anyone our code\n")
     # expect { require_relative '../../secret_encoder.rb' }.to output(/D4n't t2ll 1ny4n2 45r c4d2/).to_stdout
     output = with_captured_stdout { require_relative('../../secret_encoder')} 
+    output = output.gsub(/.?Enter in the secret you want to encode?.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter in the secret you want to encode\nD4n't t2ll 1ny4n2 45r c4d2/)).to be(true), "Expected output to be 'Enter in the secret you want to encode\nD4n't t2ll 1ny4n2 45r c4d2', but was #{output.inspect}."
+
+    expect(output.match?(/D4n't t2ll 1ny4n2 45r c4d2/)).to be(true), "Expected output to be 'D4n't t2ll 1ny4n2 45r c4d2', but was #{output}."
   end
 end
 
 describe "secret_decoder.rb" do
-  it "prints 'I need to be more secret', when the input is '3 n22d t4 b2 m4r2 s2cr2t'", points: 2 do
-    allow_any_instance_of(Object).to receive(:gets).and_return("3 n22d t4 b2 m4r2 s2cr2t\n")
-    # expect { require_relative '../../secret_decoder.rb' }.to output(/I need to be more secret/).to_stdout
+  it "prints 'You and i need to be more secret', when the input is 'Y45 1nd 3 n22d t4 b2 m4r2 s2cr2t'", points: 2 do
+    allow_any_instance_of(Object).to receive(:gets).and_return("Y45 1nd 3 n22d t4 b2 m4r2 s2cr2t\n")
+    # expect { require_relative '../../secret_decoder.rb' }.to output(/You and i need to be more secret/).to_stdout
     output = with_captured_stdout { require_relative('../../secret_decoder')} 
+    output = output.gsub(/.?Enter in the secret you want to decode?.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter in the secret you want to decode\nI need to be more secret/)).to be(true), "Expected output to be 'Enter in the secret you want to decode\nI need to be more secret', but was #{output.inspect}."
+
+    expect(output.match?(/You and i need to be more secret/)).to be(true), "Expected output to be 'You and i need to be more secret', but was #{output}."
   end
 end
 
@@ -145,8 +168,10 @@ describe "secret_decoder.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("D4n't t2ll 1ny4n2 45r c4d2\n")
     # expect { require_relative '../../secret_decoder.rb' }.to output(/Don't tell anyone our code/).to_stdout
     output = with_captured_stdout { require_relative('../../secret_decoder')} 
+    output = output.gsub(/.?Enter in the secret you want to decode?.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter in the secret you want to decode\nDon't tell anyone our codet/)).to be(true), "Expected output to be 'Enter in the secret you want to decode\nDon't tell anyone our codet', but was #{output.inspect}."
+
+    expect(output.match?(/Don't tell anyone our code/)).to be(true), "Expected output to be 'Don't tell anyone our code', but was #{output}."
   end
 end
 
@@ -159,9 +184,11 @@ describe "two_fer.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("alice\n")
 
     # expect { require_relative '../../two_fer' }.to output(/One for Alice, one for me/).to_stdout
-    output = with_captured_stdout { require_relative('../../two_fer')} 
+    output = with_captured_stdout { require_relative('../../two_fer')}
+    output = output.gsub(/.?Enter a name:.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter a name:\nalice/)).to be(true), "Expected output to be 'Enter a name:\nOne for Alice, one for me', but was #{output.inspect}."
+
+    expect(output.match?(/One for Alice, one for me/)).to be(true), "Expected output to be 'One for Alice, one for me', but was #{output}."
   end
 end
 
@@ -174,9 +201,10 @@ describe "two_fer.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("shreya\n")
 
     # expect { require_relative '../../two_fer' }.to output(/One for Shreya, one for me/).to_stdout
-    output = with_captured_stdout { require_relative('../../two_fer')} 
-    output = "empty" if output.empty? 
-    expect(output.match?(/Enter a name:\nshreya/)).to be(true), "Expected output to be 'Enter a name:\nOne for Shreya, one for me', but was #{output.inspect}."
+    output = with_captured_stdout { require_relative('../../two_fer')}
+    output = output.gsub(/.?Enter a name:.?/, "").strip
+    output = "empty" if output.empty?
+    expect(output.match?(/One for Shreya, one for me/)).to be(true), "Expected output to be 'One for Shreya, one for me', but was #{output}."
   end
 end
 
@@ -190,8 +218,9 @@ describe "two_fer.rb" do
 
     # expect { require_relative '../../two_fer' }.to output(/One for you, one for me/).to_stdout
     output = with_captured_stdout { require_relative('../../two_fer')} 
-    output = "empty" if output.empty? 
-    expect(output.match?(/Enter a name:\nOne for you, one for me/)).to be(true), "Expected output to be 'Enter a name:\nOne for you, one for me', but was #{output.inspect}."
+    output = "empty" if output.empty?
+    output = output.gsub(/.?Enter a name:.?/, "").strip
+    expect(output.match?(/One for you, one for me/)).to be(true), "Expected output to be 'One for you, one for me', but was #{output.inspect}."
   end
 end
 
@@ -206,6 +235,7 @@ describe "character_types.rb" do
 
     # expect { require_relative '../../character_types' }.to output(/Number of letters in the string is: 8.?\n.?Number of spaces in the string is: 3.?\n.?Number of digits in the string is: 4/i).to_stdout
     output = with_captured_stdout { require_relative('../../character_types')} 
+    output = output.gsub(/.?Enter a sentence:.?/, "").strip
     output = "empty" if output.empty? 
     expect(output.match?(/Number of letters in the string is: 8.?\n.?Number of spaces in the string is: 3.?\n.?Number of digits in the string is: 4/i)).to be(true), "Expected output to be 'Number of letters in the string is: 8\\nNumber of spaces in the string is: 3\\nNumber of digits in the string is: 4', but was #{output.inspect}."
   end
@@ -220,7 +250,8 @@ describe "character_types.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("game 1 12 58 09 \n")
 
     # expect { require_relative '../../character_types' }.to output(/Number of letters in the string is: 4.?\n.?Number of spaces in the string is: 5.?\n.?Number of digits in the string is: 7/i).to_stdout
-    output = with_captured_stdout { require_relative('../../character_types')} 
+    output = with_captured_stdout { require_relative('../../character_types')}
+    output = output.gsub(/.?Enter a sentence:.?/, "").strip
     output = "empty" if output.empty? 
     expect(output.match?(/Number of letters in the string is: 4.?\n.?Number of spaces in the string is: 5.?\n.?Number of digits in the string is: 7/i)).to be(true), "Expected output to be 'Number of letters in the string is: 4\\nNumber of spaces in the string is: 5\\nNumber of digits in the string is: 7', but was #{output.inspect}."
   end
@@ -235,7 +266,8 @@ describe "character_types.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("\n")
 
     # expect { require_relative '../../character_types' }.to output(/Number of letters in the string is: 0.?\n.?Number of spaces in the string is: 0.?\n.?Number of digits in the string is: 0/i).to_stdout
-    output = with_captured_stdout { require_relative('../../character_types')} 
+    output = with_captured_stdout { require_relative('../../character_types')}
+    output = output.gsub(/.?Enter a sentence:.?/, "").strip
     output = "empty" if output.empty? 
     expect(output.match?(/Number of letters in the string is: 0.?\n.?Number of spaces in the string is: 0.?\n.?Number of digits in the string is: 0/i)).to be(true), "Expected output to be 'Number of letters in the string is: 0\\nNumber of spaces in the string is: 0\\nNumber of digits in the string is: 0', but was #{output.inspect}."
   end
@@ -293,7 +325,12 @@ describe "sum_odd_integers.rb" do
 
     allow_any_instance_of(Object).to receive(:gets).and_return("9 5 4\n")
 
-    expect { require_relative '../../sum_odd_integers' }.to output(/14/i).to_stdout
+    # expect { require_relative '../../sum_odd_integers' }.to output(/14/i).to_stdout
+    output = with_captured_stdout { require_relative('../../sum_odd_integers')}
+    output = output.gsub(/.?Enter at least 2 numbers, separated by spaces:.?/, "").strip
+    output = "empty" if output.empty?
+
+    expect(output.match?(/14/i)).to be(true), "Expected output to be '14', but was #{output}."
 
   end
 end
@@ -307,9 +344,10 @@ describe "sum_odd_integers.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("2 4 6 8\n")
 
     # expect { require_relative '../../sum_odd_integers' }.to output(/0/i).to_stdout
-    output = with_captured_stdout { require_relative('../../sum_odd_integers')} 
+    output = with_captured_stdout { require_relative('../../sum_odd_integers')}
+    output = output.gsub(/.?Enter at least 2 numbers, separated by spaces:.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter at least 2 numbers, separated by spaces:\n0/i)).to be(true), "Expected output to be 'Enter at least 2 numbers, separated by spaces:\\n0', but was #{output.inspect}."
+    expect(output.match?(/0/i)).to be(true), "Expected output to be '0', but was #{output}."
   end
 end
 
@@ -322,9 +360,10 @@ describe "sum_odd_integers.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("1 1 3\n")
 
     # expect { require_relative '../../sum_odd_integers' }.to output(/5/i).to_stdout
-    output = with_captured_stdout { require_relative('../../sum_odd_integers')} 
+    output = with_captured_stdout { require_relative('../../sum_odd_integers')}
+    output = output.gsub(/.?Enter at least 2 numbers, separated by spaces:.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter at least 2 numbers, separated by spaces:\n5/i)).to be(true), "Expected output to be 'Enter at least 2 numbers, separated by spaces:\\n5', but was #{output.inspect}."
+    expect(output.match?(/5/i)).to be(true), "Expected output to be '5', but was #{output}."
   end
 end
 
@@ -337,9 +376,10 @@ describe "leap_year.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("2016\n")
 
     # expect { require_relative '../../leap_year' }.to output(/2016 is a leap year/i).to_stdout
-    output = with_captured_stdout { require_relative('../../leap_year')} 
+    output = with_captured_stdout { require_relative('../../leap_year')}
+    output = output.gsub(/.?Enter a year.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter a year:\n2016 is a leap year/i)).to be(true), "Expected output to be 'Enter a year:\\n2016 is a leap year', but was #{output.inspect}."
+    expect(output.match?(/2016 is a leap year/i)).to be(true), "Expected output to be '2016 is a leap year', but was #{output}."
   end
 end
 
@@ -352,9 +392,10 @@ describe "leap_year.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("1804\n")
 
     # expect { require_relative '../../leap_year' }.to output(/1804 is a leap year/i).to_stdout
-    output = with_captured_stdout { require_relative('../../leap_year')} 
+    output = with_captured_stdout { require_relative('../../leap_year')}
+    output = output.gsub(/.?Enter a year.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter a year:\n1804 is a leap year/i)).to be(true), "Expected output to be 'Enter a year:\\n1804 is a leap year', but was #{output.inspect}."
+    expect(output.match?(/1804 is a leap year/i)).to be(true), "Expected output to be '1804 is a leap year', but was #{output}."
   end
 end
 
@@ -367,9 +408,10 @@ describe "leap_year.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("1800\n")
 
     # expect { require_relative '../../leap_year' }.to output(/1800 is not a leap year/i).to_stdout
-    output = with_captured_stdout { require_relative('../../leap_year')} 
+    output = with_captured_stdout { require_relative('../../leap_year')}
+    output = output.gsub(/.?Enter a year.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter a year:\n1800 is not a leap year/i)).to be(true), "Expected output to be 'Enter a year:\\n1800 is not a leap year', but was #{output.inspect}."
+    expect(output.match?(/1800 is not a leap year/i)).to be(true), "Expected output to be '1800 is not a leap year', but was #{output}."
   end
 end
 
@@ -382,9 +424,10 @@ describe "leap_year.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("2200\n")
 
     # expect { require_relative '../../leap_year' }.to output(/2200 is not a leap year/i).to_stdout
-    output = with_captured_stdout { require_relative('../../leap_year')} 
+    output = with_captured_stdout { require_relative('../../leap_year')}
+    output = output.gsub(/.?Enter a year.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter a year:\n1804 is a leap year/i)).to be(true), "Expected output to be 'Enter a year:\\n1804 is a leap year', but was #{output.inspect}."
+    expect(output.match?(/2200 is not a leap year/i)).to be(true), "Expected output to be '2200 is not a leap year', but was #{output}."
   end
 end
 
@@ -399,8 +442,9 @@ describe "raindrops.rb" do
     
     # expect{ require_relative "../../raindrops.rb" }.to output(/52/).to_stdout
     output = with_captured_stdout { require_relative('../../raindrops')} 
+    output = output.gsub(/.?Enter an integer.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter an integer\n52/i)).to be(true), "Expected output to be 'Enter an integer\\n52', but was #{output.inspect}."
+    expect(output.match?(/52/i)).to be(true), "Expected output to be '52', but was #{output}."
   end
 end
 
@@ -412,9 +456,10 @@ describe "raindrops.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("105\n")
     
     # expect{ require_relative "../../raindrops.rb" }.to output(/PlingPlangPlong/).to_stdout
-    output = with_captured_stdout { require_relative('../../raindrops')} 
+    output = with_captured_stdout { require_relative('../../raindrops')}
+    output = output.gsub(/.?Enter an integer.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter an integer\nPlingPlangPlong/)).to be(true), "Expected output to be 'Enter an integer\\PlingPlangPlong', but was #{output.inspect}."
+    expect(output.match?(/PlingPlangPlong/)).to be(true), "Expected output to be 'PlingPlangPlong', but was #{output}."
   end
 end
 
@@ -426,9 +471,10 @@ describe "raindrops.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("3125\n")
     
     # expect{ require_relative "../../raindrops.rb" }.to output(/Plang/).to_stdout
-    output = with_captured_stdout { require_relative('../../raindrops')} 
+    output = with_captured_stdout { require_relative('../../raindrops')}
+    output = output.gsub(/.?Enter an integer.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter an integer\n3125/i)).to be(true), "Expected output to be 'Enter an integer\\n3125', but was #{output.inspect}."
+    expect(output.match?(/Plang/i)).to be(true), "Expected output to be 'Plang', but was #{output}."
   end
 end
 
@@ -440,9 +486,10 @@ describe "raindrops.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("49\n")
     
     # expect{ require_relative "../../raindrops.rb" }.to output(/Plong/).to_stdout
-    output = with_captured_stdout { require_relative('../../raindrops')} 
+    output = with_captured_stdout { require_relative('../../raindrops')}
+    output = output.gsub(/.?Enter an integer.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter an integer\nPlong/i)).to be(true), "Expected output to be 'Enter an integer\\nPlong', but was #{output.inspect}."
+    expect(output.match?(/Plong/i)).to be(true), "Expected output to be 'Plong', but was #{output}."
   end
 end
 
@@ -454,9 +501,10 @@ describe "raindrops.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("35\n")
     
     # expect{ require_relative "../../raindrops.rb" }.to output(/PlangPlong/).to_stdout
-    output = with_captured_stdout { require_relative('../../raindrops')} 
+    output = with_captured_stdout { require_relative('../../raindrops')}
+    output = output.gsub(/.?Enter an integer.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter an integer\nPlangPlong/i)).to be(true), "Expected output to be 'Enter an integer\\nPlangPlong', but was #{output.inspect}."
+    expect(output.match?(/PlangPlong/i)).to be(true), "Expected output to be 'PlangPlong', but was #{output}."
   end
 end
 
@@ -468,9 +516,10 @@ describe "raindrops.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("25\n")
     
     # expect{ require_relative "../../raindrops.rb" }.to output(/Plang/).to_stdout
-    output = with_captured_stdout { require_relative('../../raindrops')} 
+    output = with_captured_stdout { require_relative('../../raindrops')}
+    output = output.gsub(/.?Enter an integer.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter an integer\nPlang/)).to be(true), "Expected output to be 'Enter an integer\\nPlang', but was #{output.inspect}."
+    expect(output.match?(/Plang/)).to be(true), "Expected output to be 'Plang', but was #{output}."
   end
 end
 
@@ -482,9 +531,10 @@ describe "raindrops.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("21\n")
     
     # expect{ require_relative "../../raindrops.rb" }.to output(/PlingPlong/).to_stdout
-    output = with_captured_stdout { require_relative('../../raindrops')} 
+    output = with_captured_stdout { require_relative('../../raindrops')}
+    output = output.gsub(/.?Enter an integer.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter an integer\nPlingPlong/)).to be(true), "Expected output to be 'Enter an integer\\nPlingPlong', but was #{output.inspect}."
+    expect(output.match?(/PlingPlong/)).to be(true), "Expected output to be 'PlingPlong', but was #{output}."
   end
 end
 
@@ -496,9 +546,10 @@ describe "raindrops.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("15\n")
     
     # expect{ require_relative "../../raindrops.rb" }.to output(/PlingPlang/).to_stdout
-    output = with_captured_stdout { require_relative('../../raindrops')} 
+    output = with_captured_stdout { require_relative('../../raindrops')}
+    output = output.gsub(/.?Enter an integer.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter an integer\nPlingPlang/i)).to be(true), "Expected output to be 'Enter an integer\\nPlingPlang', but was #{output.inspect}."
+    expect(output.match?(/PlingPlang/i)).to be(true), "Expected output to be 'PlingPlang', but was #{output}."
   end
 end
 
@@ -513,9 +564,9 @@ describe "think_fast.rb" do
     allow_any_instance_of(Array).to receive(:sample).and_return(5)
 
     # expect { require_relative '../../think_fast' }.to output(/5 is odd/i).to_stdout
-    output = with_captured_stdout { require_relative('../../think_fast')} 
+    output = with_captured_stdout { require_relative('../../think_fast')}
     output = "empty" if output.empty? 
-    expect(output.match?(/5 is odd/i)).to be(true), "Expected output to be '5 is odd\n', but was #{output.inspect}."
+    expect(output.match?(/5 is odd/i)).to be(true), "Expected output to be '5 is odd', but was #{output}."
   end
 end
 
@@ -531,7 +582,7 @@ describe "think_fast.rb" do
     # expect { require_relative '../../think_fast' }.to output(/40 is even/i).to_stdout
     output = with_captured_stdout { require_relative('../../think_fast')} 
     output = "empty" if output.empty? 
-    expect(output.match?(/40 is even/i)).to be(true), "Expected output to be '40 is even\n', but was #{output.inspect}."
+    expect(output.match?(/40 is even/i)).to be(true), "Expected output to be '40 is even\n', but was #{output}."
   end
 end
 
@@ -546,7 +597,7 @@ describe "think_fast.rb" do
     # expect { require_relative '../../think_fast' }.to output(/you may pass/i).to_stdout
     output = with_captured_stdout { require_relative('../../think_fast')} 
     output = "empty" if output.empty? 
-    expect(output.match?(/you may pass/i)).to be(true), "Expected output to be 'you may pass\n', but was #{output.inspect}."
+    expect(output.match?(/you may pass/i)).to be(true), "Expected output to be 'you may pass\n', but was #{output}."
   end
 end
 
@@ -573,7 +624,7 @@ describe "think_fast.rb" do
     # expect { require_relative '../../think_fast' }.to output(/\[:city, :state, :zip\]/i).to_stdout
     output = with_captured_stdout { require_relative('../../think_fast')} 
     output = "empty" if output.empty? 
-    expect(output.match?(/\[:city, :state, :zip\]/i)).to be(true), "Expected output to be '[:city, :state, :zip]\n', but was #{output.inspect}."
+    expect(output.match?(/\[:city, :state, :zip\]/i)).to be(true), "Expected output to be '[:city, :state, :zip]\n', but was #{output}."
   end
 end
 
@@ -588,7 +639,7 @@ describe "think_fast.rb" do
     # expect { require_relative '../../think_fast' }.to output(/hello!/).to_stdout
     output = with_captured_stdout { require_relative('../../think_fast')} 
     output = "empty" if output.empty? 
-    expect(output.match?(/hello!/)).to be(true), "Expected output to be 'hello!\n', but was #{output.inspect}."
+    expect(output.match?(/hello!/)).to be(true), "Expected output to be 'hello!\n', but was #{output}."
   end
 end
 
@@ -708,9 +759,10 @@ describe "anagram.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("hello,olmec\n")
 
     # expect { require_relative '../../anagram' }.to output(/false/i).to_stdout
-    output = with_captured_stdout { require_relative('../../anagram')} 
+    output = with_captured_stdout { require_relative('../../anagram')}
+    output = output.gsub(/.?Enter two words separated by a comma.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter two words separated by a comma\nfalse/i)).to be(true), "Expected output to be 'Enter two words separated by a comma\\nfalse', but was #{output.inspect}."
+    expect(output.match?(/false/i)).to be(true), "Expected output to be 'false', but was #{output}."
   end
 end
 
@@ -723,9 +775,10 @@ describe "anagram.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("elvis,lives\n")
 
     # expect { require_relative '../../anagram' }.to output(/true/i).to_stdout
-    output = with_captured_stdout { require_relative('../../anagram')} 
+    output = with_captured_stdout { require_relative('../../anagram')}
+    output = output.gsub(/.?Enter two words separated by a comma.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter two words separated by a comma\ntrue/i)).to be(true), "Expected output to be 'Enter two words separated by a comma\\ntrue', but was #{output.inspect}."
+    expect(output.match?(/true/i)).to be(true), "Expected output to be 'true', but was #{output}."
   end
 end
 
@@ -738,9 +791,10 @@ describe "anagram.rb" do
     allow_any_instance_of(Object).to receive(:gets).and_return("anagram,nag a ram\n")
 
     # expect { require_relative '../../anagram' }.to output(/true/i).to_stdout
-    output = with_captured_stdout { require_relative('../../anagram')} 
+    output = with_captured_stdout { require_relative('../../anagram')}
+    output = output.gsub(/.?Enter two words separated by a comma.?/, "").strip
     output = "empty" if output.empty? 
-    expect(output.match?(/Enter two words separated by a comma\ntrue/i)).to be(true), "Expected output to be 'Enter two words separated by a comma\\ntrue', but was #{output.inspect}."
+    expect(output.match?(/true/i)).to be(true), "Expected output to be 'true', but was #{output}."
   end
 end
 
